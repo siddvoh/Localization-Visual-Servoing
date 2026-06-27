@@ -73,13 +73,13 @@ Written to `ground_truth/poses/<object>_<timestamp>.json` plus a
 `<object>_latest.json` mirror for easy lookup.
 
 Key fields:
-- `centroid_base_mm` — object centroid in base frame (mm). **Use this as
+- `centroid_base_mm`: object centroid in base frame (mm). **Use this as
   the ground-truth target for translation-error evaluation.**
-- `pose_base_frame.translation_mm` / `rotation_matrix` — full 6-DoF pose
-  (body frame → base frame).
-- `base_corners_mm` — raw TCP readings at the 4 corners (lets you re-run
+- `pose_base_frame.translation_mm` / `rotation_matrix`: full 6-DoF pose
+  (body frame to base frame).
+- `base_corners_mm`: raw TCP readings at the 4 corners (lets you re-run
   the fit with different conventions if needed).
-- `fit_residual_rms_mm` — quality indicator. <2 mm is excellent, <5 mm is
+- `fit_residual_rms_mm`: quality indicator. <2 mm is excellent, <5 mm is
   fine, >5 mm means you probably mis-sighted a corner.
 
 ## Integrating with analyze_csvs.py
@@ -123,5 +123,5 @@ the script for each (object, placement) pair. Each run produces a fresh
 timestamped JSON; `<object>_latest.json` always points to the most recent.
 
 If the object stays at P1 across multiple trials of the same pipeline but
-different start poses, you only need to probe once — the ground truth is a
+different start poses, you only need to probe once: the ground truth is a
 property of the object placement, not of the pipeline under test.

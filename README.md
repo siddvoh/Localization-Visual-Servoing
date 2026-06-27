@@ -1,6 +1,10 @@
 # Localization for Visual Servoing
 
-FoundationPose vs. EKF-based stereo pose tracking for manipulator visual servoing.
+Open source research code comparing FoundationPose against EKF-based stereo pose tracking for manipulator visual servoing.
+
+A robotic arm can only servo to a target it can localize. This project asks a focused question: which perception back-end lets an eye-in-hand manipulator converge on a target object most reliably? We answer it by swapping three perception back-ends through one shared visual servoing loop on real hardware, so the observed differences are attributable to perception and not to the controller, the robot, or the logger.
+
+The full source for all three pipelines, the EKF core, the PBVS controller, the experiment runner, and the ground-truth probing tool is in this repository under the MIT license.
 
 **Authors**
 
@@ -26,3 +30,11 @@ scripts/     Source for the three pipelines and the evaluation tooling
 data/        Reference photos, reference masks, per-trial CSV logs
 results/     Post-hoc ground-truth evaluation outputs
 ```
+
+## Ground truth
+
+Translation error is measured against an independent ground truth produced by xArm TCP corner probing, not against FoundationPose's own output. The probing tool uses only the arm's joint encoders (no camera, no depth, no pose network), so it is an independent reference for all three pipelines. See `scripts/ground_truth/README.md` for the probing procedure and accuracy budget.
+
+## License
+
+MIT, open source. See [LICENSE](LICENSE).
